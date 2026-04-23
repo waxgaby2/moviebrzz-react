@@ -4,7 +4,7 @@ import { Header } from "../components/Header"
 import { HeroCard } from "../components/HeroCard"
 import { SearchList } from "../components/SearchList"
 import { SearchMobile } from "../components/SearchMobile"
-import { WatchList } from "../components/WatchList"
+import { WatchList } from "../components/Watchlist"
 import { useAppContext } from "../context/useAppContext"
 import { Success } from "../components/Successful"
 
