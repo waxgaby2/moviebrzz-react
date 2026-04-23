@@ -33,3 +33,8 @@ export const randomMovies = async (genre:number)=>{
   const res= await fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&api_key=${apiKey}`)
   return res.json();
 }
+
+export const casts= async (id: number)=>{
+  const res=await fetch ( `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`);
+return res.json();
+}
