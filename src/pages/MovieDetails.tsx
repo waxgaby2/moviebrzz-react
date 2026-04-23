@@ -11,6 +11,7 @@ import { SearchMobile } from "../components/SearchMobile";
 import { ColorRing } from "react-loader-spinner";
 import { Success } from "../components/Successful";
 import { casts } from "../api/fetchMovie";
+import { HomeButton } from "../components/Backbutton";
 
 interface Post {
   id: number;
@@ -123,6 +124,7 @@ if (error) {
 
     return (<div>
          <Header />
+         <HomeButton />
          <Success />
          <div className="pt-13">
         <div

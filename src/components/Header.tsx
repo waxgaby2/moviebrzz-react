@@ -12,10 +12,10 @@ export function Header(){
 
     return ( <div className="fixed backdrop-blur-md bg-[#1e293b]/80 top-0 z-50  w-full px-3 pt-4 mb-2 sm:px-20 flex justify-between items-center">
  
-<Link className="flex " to="/">
+<div className="flex">
 <img src={favicon} className="w-10" alt="logo" />
-<p className="text-4xl ml-3 font-bold ">MovieBrzz</p></Link>
-
+<h1 className="m-0! p-0! font-bold! ">MovieBrzz</h1>
+</div>
 <Search />
     </div>)
 }
