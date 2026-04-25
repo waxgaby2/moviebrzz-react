@@ -175,7 +175,7 @@ className="rounded-lg shadow-[5px_5px_15px_5px_rgba(0,0,0,0.6)]" />
         </div>
         
         </div>
-           <div className="sm:ml-10 sm:col-span-3 max-sm:mt-10 w-full">
+           <div className="lg:ml-10 lg:col-span-3 mt-10 w-full">
             <h2 className="text-white mb-5 sm:mb-9 font-bold! text-2xl!">
               {movie?.title}
             </h2>
