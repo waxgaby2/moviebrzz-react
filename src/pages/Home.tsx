@@ -19,10 +19,10 @@ export function Home(){
         
     <Header />
     
+<SearchMobile />
  <div className="pt-13">
     <HeroCard />
     </div>
-<SearchMobile />
 <Success />
 <WatchList />
     <PopularMovies />

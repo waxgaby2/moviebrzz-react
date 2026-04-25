@@ -12,6 +12,8 @@ import { ColorRing } from "react-loader-spinner";
 import { Success } from "../components/Successful";
 import { casts } from "../api/fetchMovie";
 import { HomeButton } from "../components/Backbutton";
+import { FaPlus } from "react-icons/fa6";
+import { useWatchList } from "../hooks/useWatchList";
 
 interface Post {
   id: number;
@@ -41,32 +43,45 @@ const [cast,setCast]=useState<[]>([]);
 const [castError,setCastError]=useState(false);
 const [castLoading,setCastLoading]=useState<boolean>(false)
 const [director,setDirector]=useState<string>('')
-    useEffect(() => {
-          if (!id) return;
-      movieDetail(id).then(data => {
-        setMovie(data);
-        setGenre(data.genres)
-              console.log(data);
+  const [collectMovie,setCollectMovie]=useState<Movie | null>(null)
+const {setAdded}=useAppContext();
+const {watchList}=useAppContext();
+const { addMovie, removeMovie } = useWatchList();
+
+
+
+
+useEffect(() => {
+  if (!id) return;
+
+  setLoading(true);       
+  setCastLoading(true); 
+
+  movieDetail(id)
+    .then((data) => {
+      setMovie(data);
+      setGenre(data.genres);
     })
-      .catch(err=>{
-       setError("Error");
-    setLoading(false) 
-      }).finally(()=> {
-      setLoading(false)
+    .catch(() => {
+      setError("Error");
+    })
+    .finally(() => {
+      setLoading(false);
     });
 
-     casts(id).then(data => {
-        setCast(data.cast.slice(0, 6))
-              setDirector(data.crew.find((p) => p.job === "Director"));
+  casts(id)
+    .then((data) => {
+      setCast(data.cast.slice(0, 6));
+      setDirector(data.crew.find((p) => p.job === "Director"));
     })
-      .catch(err=>{
-       setCastError("Error");
-    setCastLoading(false) 
-      }).finally(()=> {
-      setCastLoading(false)
+    .catch(() => {
+      setCastError(true);
+    })
+    .finally(() => {
+      setCastLoading(false);
     });
 
-    }, [id])
+}, [id]);
 
 
 
@@ -135,14 +150,30 @@ if (error) {
   <div>
     <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={`${movie?.title} picture`} 
 className="rounded-lg shadow-[5px_5px_15px_5px_rgba(0,0,0,0.6)]" />
+    
+    <div className="flex sm:gap-10 max-sm:flex-col "> 
    <button type="button" aria-label="play movie" className="p-10 transsition-all
-            duration-300 ease
+            duration-300 ease shadow-[2px_2px_15px_5px_rgba(0,0,0,0.4)]
             hover:bg-gray-400 flex mt-5 sm:mt-8 bg-white text-black px-6 py-4 rounded-md font-semibold">
           <MdPlayArrow className="w-6 h-6" />
           Watch Trailer
         </button>
+       <button type="button" aria-label="play movie" className={` transsition-all
+    duration-300 ease justify-center items-center 
+    hover:bg-gray-400 flex mt-5 sm:mt-8
+      text-white px-6 py-4 rounded-md shadow-[2px_2px_15px_5px_rgba(0,0,0,0.4)]
+     font-semibold ${watchList.some(m => m.id == movie?.id)? "cursor-not-allowed bg-black":"bg-blue-800"}`}
+      disabled={watchList.some(m => m.id ==movie?.id)}  
+     onClick={(e)=>{addMovie(movie);
+    setAdded(true);
+  }}>
+  <FaPlus className="w-6 h-6 mr-3" />
+ {watchList.some(m => m.id ==movie?.id)? "Added to WatchList":"Add to Watchlist"} 
+</button>
         </div>
-           <div className="sm:ml-10 sm:col-span-3 max-sm:mt-10">
+        
+        </div>
+           <div className="sm:ml-10 sm:col-span-3 max-sm:mt-10 w-full">
             <h2 className="text-white mb-5 sm:mb-9 font-bold! text-2xl!">
               {movie?.title}
             </h2>

@@ -5,7 +5,7 @@ import { useAppContext } from "../context/useAppContext";
 import { MdMoreVert } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
-
+import { useWatchList } from "../hooks/useWatchList";
 
 interface Post {
   id: number;
@@ -31,33 +31,13 @@ const scrollRef=useRef<HTMLDivElement | null>(null)
 const [isScroll,setScroll]=useState<boolean>(false)
 const [isForwardScroll,setForwardScroll]=useState<boolean>(false)
 const {setHero} = useAppContext();
-const [menuMovieId,setMenuMovieId]=useState<number[]>([]);
+const [menuMovieId,setMenuMovieId]=useState<number|null>(null);
 const movieId=useRef([])
 const [collectMovie,setCollectMovie]=useState<Movie | null>(null)
 const {watchList,setWatchList}=useAppContext();
 const {setAddMovie}=useAppContext();
 const {isAdded,setAdded}=useAppContext();
-
-useEffect(()=>{
-   if (!collectMovie) return;
-setWatchList((prev)=>{
-  const exists = prev.some((m) => m.id === collectMovie.id);
-    if (exists){
-
-      return prev;
-    }
-  
-    return [...prev, collectMovie];
-})
-},[collectMovie])
-
-
-
-useEffect(()=>{
-localStorage.setItem("movielist", JSON.stringify(watchList));
-
-},[watchList])
-
+const { addMovie, removeMovie } = useWatchList();
 
 
 
@@ -113,7 +93,7 @@ setLoading(false)
  </div></div>
  
 return (
-    <div className="relative m-3 max-sm:m-3">
+    <div className="relative m-3 sm:mt-14">
         <div className="flex justify-between"><h2  className="sm:font-extrabold!">Popular Movies</h2>
         </div>
             {isForwardScroll &&<button type="button" aria-label="scroll button" onClick={()=>scroll(1)}
@@ -158,48 +138,32 @@ return (
               transition-all duration-300 ease object-fit"
             />
             <div className="flex relative justify-center w-full">
-                          <p className="sm:font-bold px-6 pt-3 text-center">{movie.title}</p>
+                          <p className="sm:font-bold px-6 py-6 text-center">{movie.title}</p>
          </div>
         
    
    </Link>   
   
-      <button aria-label={`${movie.title} menu button`}
+  <button aria-label={`${movie.title} menu button`}
   onClick={() => {
-   const el=movieId.current[index]
-    if(menuMovieId[index]===index){
-        el.style.opacity="0";
-      setMenuMovieId(prev => {
-      const array=[...prev]
-      array.splice(index,1)
-      return array; })
-      return;
-    } 
-    el.style.opacity="100"
-    setMenuMovieId(prev => {
-      const array=[...prev]
-      array[index]=index;
-      return array;
-    })
+     setMenuMovieId(prev => (prev === movie.id ? null : movie.id));
   }}
-  type="button" className={`cursor-pointer absolute bottom-10 right-1
-  
-  `}>
+  type="button" className="cursor-pointer absolute bottom-7 right-1 m-2"
+>
   <MdMoreVert size={24} className="hover:text-white hover:scale-125 transition-all duration-300 ease-in-out" />
 </button>
 
-        <div
-ref={(e) => {
-        movieId.current[index] = e;
-      }}
-  id={`menu-${movie.id}`}
-  className={`absolute opacity-0 
-  tansition-all duration-500 ease-in-out
-  right-2 top-70 inset-auto  text-gray-700 rounded-md shadow-lg  p-2
-  ${watchList.some(m => m.id == movie.id)? "bg-black  cursor-not-allowed":"bg-white hover:text-white hover:bg-blue-950"}`}
->
+ 
+  
+      <div
+  className={`absolute right-2 top-70 text-gray-700
+     rounded-md shadow-lg p-2 
+     transition-all duration-300
+  ${menuMovieId === movie.id ? "opacity-100" : "opacity-0 pointer-events-none"}
+   ${watchList.some(m => m.id == movie.id)? "bg-black  cursor-not-allowed":"bg-white hover:text-white hover:bg-blue-950"}
+   `}>
   <button type="button" disabled={watchList.some(m => m.id == movie.id)}  className={`${watchList.some(m => m.id == movie.id)? "cursor-not-allowed":""}`}
-   onClick={(e)=>{setCollectMovie(movie);
+   onClick={(e)=>{ addMovie(movie);
     setAdded(true);
   }}>Add to watchlist</button>
 </div>

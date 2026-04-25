@@ -3,6 +3,8 @@ import { useAppContext } from "../context/useAppContext";
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import { MdMoreVert } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useWatchList } from "../hooks/useWatchList";
+
 
 type Movie = {
   id: number;
@@ -12,7 +14,7 @@ type Movie = {
 };
 
 export function WatchList(){
-   const {addMovie}=useAppContext();
+
 const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [trendMovies,setTrendMovies]= useState<Movie[]>([])
@@ -20,30 +22,14 @@ const[isFocus,setFocus]=useState<boolean>(false)
 const scrollRef=useRef<HTMLDivElement | null>(null)  
 const [isScroll,setScroll]=useState<boolean>(false)
 const [isForwardScroll,setForwardScroll]=useState<boolean>(false)
-const [menuMovieId,setMenuMovieId]=useState<number[]>([]);
+const [menuMovieId,setMenuMovieId]=useState<number | null>();
 const movieId=useRef([]);
 const [collectMovie,setCollectMovie]=useState<Movie | null>(null)
 const {watchList,setWatchList}=useAppContext();
 const {setAddMovie}=useAppContext();
-
-useEffect(() => {
-  if (!collectMovie) return;
-
-  setWatchList((prev) => {
-    const result = prev.filter((m) => m.id !== collectMovie.id);
-
-    return result;
-  });
-}, [collectMovie]);
-
-useEffect(()=>{
-localStorage.setItem("movielist", JSON.stringify(watchList));
-
-},[watchList])
+const { addMovie, removeMovie } = useWatchList();
 
 
-
-  
 
     function scroll(offsetMultiplier: number) {
     const el = scrollRef.current;
@@ -72,7 +58,7 @@ localStorage.setItem("movielist", JSON.stringify(watchList));
 
 if(watchList.length<1) return (<div></div>)
 
-    return (<div className="relative m-3 max-sm:m-3">
+    return (<div className="relative m-3  sm:mt-14">
   <div className="flex justify-between"><h2  className="sm:font-extrabold! ">My Watchlist</h2>
         </div>
 
@@ -117,44 +103,26 @@ return (<div key={movie.id}
             />
             
             <div className="flex relative justify-center w-full">
-                          <p className="sm:font-bold px-6 py-3 text-center">{movie.title}</p>
+                          <p className="sm:font-bold px-6 text-center py-3">{movie.title}</p>
            </div>
         
     </Link>  
     
      <button aria-label={`${movie.title} menu button`}
   onClick={() => {
-   const el=movieId.current[index]
-    if(menuMovieId[index]===index){
-        el.style.opacity="0";
-      setMenuMovieId(prev => {
-      const array=[...prev]
-      array.splice(index,1)
-      return array; })
-      return;
-    } 
-    el.style.opacity="100"
-    setMenuMovieId(prev => {
-      const array=[...prev]
-      array[index]=index;
-      return array;
-    })
+     setMenuMovieId(prev => (prev === movie.id ? null : movie.id));
   }}
-  type="button" className="cursor-pointer absolute bottom-10 right-1"
+  type="button" className="cursor-pointer absolute bottom-7 right-1 m-2"
 >
   <MdMoreVert size={24} className="hover:scale-125 hover:text-white transition-all duration-300 ease-in-out" />
 </button>
 
         <div
-ref={(e) => {
-        movieId.current[index] = e;
-      }}
-  id={`menu-${movie.id}`}
-  className="absolute opacity-0 hover:bg-blue-950 hover:text-white
-  tansition-all duration-500 ease-in-out
-  right-2 top-70 inset-auto bg-white text-gray-700 rounded-md shadow-lg  p-2"
->
-  <button type="button" onClick={()=>{setCollectMovie(movie)}}>Remove</button>
+  className={`absolute right-2 top-70 bg-white text-gray-700
+     rounded-md shadow-lg p-2 
+     transition-all duration-300
+  ${menuMovieId === movie.id ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+  <button className="cursor-pointer" type="button" onClick={()=>{removeMovie(movie)}}>Remove</button>
 </div>
     
         </div>)

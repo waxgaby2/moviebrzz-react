@@ -16,9 +16,12 @@ function App() {
 const [hero,setHero]=useState<any | null>(null)
 const [input,setInput]=useState<string | null>(null)
 const [searchResult,setSearchResult]=useState<string[]>([])
-const [isAdded,setAdded]=useState<boolean>(false);
+const [isAdded,setAdded]=useState<boolean>(false)
+const [isSearchClick,setSearchClick]=useState<boolean>(false);
+ 
 const [addMovie,setAddMovie]=useState<string>('')
 const [watchList, setWatchList] = useState<Movie[]>(() => {
+
   try {
     const item = localStorage.getItem("movielist");
     return item ? JSON.parse(item) : [];
@@ -30,7 +33,7 @@ const [genreIds,setGenreIds]=useState<number[]>([])
   return (
     
       <BrowserRouter>
-      <AppContext.Provider value={{isAdded,setAdded,genreIds,setGenreIds,watchList, setWatchList,hero,setHero,input,setInput,searchResult,setSearchResult,addMovie,setAddMovie}}>
+      <AppContext.Provider value={{isSearchClick,setSearchClick,isAdded,setAdded,genreIds,setGenreIds,watchList, setWatchList,hero,setHero,input,setInput,searchResult,setSearchResult,addMovie,setAddMovie}}>
        <div className="min-h-screen overflow-x-hidden
        bg-linear-to-br from-[#0f172a] via-[#1e293b] to-[#020617]">
           <Routes>

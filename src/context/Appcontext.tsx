@@ -22,6 +22,8 @@ genreIds:number[];
 setGenreIds:React.Dispatch<React.SetStateAction<number[]>>;
 isAdded:boolean;
 setAdded:React.Dispatch<React.SetStateAction<boolean>>;
+isSearchClick:boolean;
+setSearchClick:React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const AppContext = createContext<AppContextType | null>(null);

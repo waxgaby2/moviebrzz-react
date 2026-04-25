@@ -6,7 +6,6 @@ import { Search } from "./Search";
 import { Link } from "react-router-dom";
 import favicon from "../assets/favicon.png"
 
-
 const navstyles: string='px-5 p-2.5 active:bg-amber-400 rounded-t-[7px] transition-all duration-400 inline-block hover:-translate-y-0.5 hover:bg-gray-300 border-none hover:text-amber-700 ease-in-out'
 export function Header(){
 

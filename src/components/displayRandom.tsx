@@ -17,15 +17,14 @@ import { MdMoreVert } from "react-icons/md";
      const [error, setError] = useState<string | null>(null); 
      const [movies,setMovies]= useState<Movie[]>([])
     const [randomMov,setRandomMov]=useState<Movie[]>([])
-    const[isFocus,setFocus]=useState<boolean>(false)
+ const[isFocus,setFocus]=useState<boolean>(false)
     const scrollRef=useRef<HTMLDivElement | null>(null)  
     const [isScroll,setScroll]=useState<boolean>(false)
     const [isForwardScroll,setForwardScroll]=useState<boolean>(false)
-    const [menuMovieId,setMenuMovieId]=useState<number[]>([]);
+   const {setAddMovie}=useAppContext();
+    const [menuMovieId,setMenuMovieId]=useState<number|null>(null);
     const movieId=useRef([]);
     const [collectMovie,setCollectMovie]=useState<Movie | null>(null)
-    
-    const {setAddMovie}=useAppContext();
     const {watchList,setWatchList}=useAppContext();
     const {setAdded}=useAppContext();
     
@@ -98,39 +97,23 @@ localStorage.setItem("movielist", JSON.stringify(watchList));
         
    
    </Link>    
-   
-    <button aria-label={`${movie.title} menu button`}
+  <button aria-label={`${movie.title} menu button`}
   onClick={() => {
-   const el=movieId.current[index]
-    if(menuMovieId[index]===index){
-        el.style.opacity="0";
-      setMenuMovieId(prev => {
-      const array=[...prev]
-      array.splice(index,1)
-      return array; })
-      return;
-    } 
-    el.style.opacity="100"
-    setMenuMovieId(prev => {
-      const array=[...prev]
-      array[index]=index;
-      return array;
-    })
+     setMenuMovieId(prev => (prev === movie.id ? null : movie.id));
   }}
-  type="button" className="cursor-pointer absolute bottom-10 right-1"
+  type="button" className="cursor-pointer absolute bottom-7 right-1 m-2"
 >
   <MdMoreVert size={24} className="hover:scale-125 hover:text-white transition-all duration-300 ease-in-out" />
 </button>
- <div
-ref={(e) => {
-        movieId.current[index] = e;
-      }}
-  id={`menu-${movie.id}`}
-  className={`absolute opacity-0 
-  tansition-all duration-500 ease-in-out
-  right-2 top-70 inset-auto  text-gray-700 rounded-md shadow-lg  p-2
-  ${watchList.some(m => m.id == movie.id)? "bg-black  cursor-not-allowed":"bg-white hover:text-white hover:bg-blue-950"}`}
->
+
+      <div
+  className={`absolute right-2 top-70 text-gray-700
+     rounded-md shadow-lg p-2 
+     transition-all duration-300
+  ${menuMovieId === movie.id ? "opacity-100" : "opacity-0 pointer-events-none"}
+   ${watchList.some(m => m.id == movie.id)? "bg-black  cursor-not-allowed":"bg-white hover:text-white hover:bg-blue-950"}
+   `}>
+
   <button type="button" disabled={watchList.some(m => m.id == movie.id)}  className={`${watchList.some(m => m.id == movie.id)? "cursor-not-allowed":""}`}
    onClick={(e)=>{setCollectMovie(movie);
     setAdded(true);

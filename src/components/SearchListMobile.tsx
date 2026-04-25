@@ -11,27 +11,32 @@ type Movie = {
 };
 type Props={
   hidden:boolean;
+  onBlur:any;
 }
-export function SearchListMobile({hidden}:Props){
+export function SearchListMobile({hidden,onBlur}:Props){
     const {searchResult}=useAppContext();
+    const {isSearchClick,setSearchClick}=useAppContext();
 return (
-    <div className={`w-[95%]
-    max-h-[300px] overflow-y-auto w-[90vw]
-    bg-[#1e293b]  backdrop-blur-md text-white
-     shadow-2xl border border-gray-200 ${hidden ? "hidden" : ""}`}>
+    <div  className={` fixed top-19 z-80
+    max-h-[500px] overflow-y-auto w-[99vw] opacity-0
+    bg-white shado
+    ${isSearchClick ? "opacity-100":""}
+     backdrop-blur-md text-gray-500
+     shadow-[0_0_2px_1px_rgba(255,255,164,0.4)]`}>
 
       {searchResult.length===0 ? (<div className="h-[100px] flex justify-center items-center">
         <p className="text-center">No Results found</p>
         </div>) : (
-        <ul>
+        <ul className="z-80">
           {searchResult.map((movie) => {
             
            return <li
-              key={movie.id}
-              className="flex items-center gap-3 p-3 
-              hover:bg-gray-100 cursor-pointer 
-              transition-all duration-200"
-            ><Link to={`/movie/${movie.id}`}>
+              key={movie.id} onClick={()=>{setSearchClick(false)}}
+              className="flex items-center p-3 
+              hover:bg-gray-100 cursor-pointer
+              transition-all duration-200
+              active:bg-gray-600 active:text-white"
+            ><Link className="w-full " to={`/movie/${movie.id}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
                 alt={movie.title}
