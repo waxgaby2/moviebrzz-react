@@ -76,7 +76,7 @@ if(watchList.length<1) return (<div></div>)
             className={`absolute  top-60
         ${isScroll ? "opacity-100" : "opacity-0 pointer-events-none"}
             -translate-y-1/2 
-             h-15  w-7
+             h-15  w-7 
              z-40 font-bold rounded-tl-md rounded-bl-md
               left-0`}>
                 <MdArrowBackIos className="w-12 h-12 pl-2 hover:scale-120

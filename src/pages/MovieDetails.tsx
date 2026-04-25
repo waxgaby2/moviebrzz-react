@@ -161,8 +161,8 @@ className="rounded-lg shadow-[5px_5px_15px_5px_rgba(0,0,0,0.6)]" />
        <button type="button" aria-label="play movie" className={` transsition-all
     duration-300 ease justify-center items-center 
     hover:bg-gray-400 flex mt-5 sm:mt-8
-      text-white px-6 py-4 rounded-md shadow-[2px_2px_15px_5px_rgba(0,0,0,0.4)]
-     font-semibold ${watchList.some(m => m.id == movie?.id)? "cursor-not-allowed bg-black":"bg-blue-800"}`}
+      text-white px-6 py-4 rounded-md
+     font-semibold ${watchList.some(m => m.id == movie?.id)? "cursor-not-allowed bg-black shadow-[2px_2px_15px_5px_rgba(255,255,255,0.2)]":"bg-blue-800 shadow-[2px_2px_15px_5px_rgba(0,0,0,0.4)]"}`}
       disabled={watchList.some(m => m.id ==movie?.id)}  
      onClick={(e)=>{addMovie(movie);
     setAdded(true);
