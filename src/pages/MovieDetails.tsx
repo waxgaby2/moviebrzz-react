@@ -175,7 +175,7 @@ className="rounded-lg shadow-[5px_5px_15px_5px_rgba(0,0,0,0.6)]" />
         </div>
         
         </div>
-           <div className="lg:ml-10 lg:col-span-3 mt-10 w-full">
+           <div className="lg:ml-10 lg:col-span-3 max-md:mt-10 w-full">
             <h2 className="text-white mb-5 sm:mb-9 font-bold! text-2xl!">
               {movie?.title}
             </h2>
@@ -213,8 +213,8 @@ return <li key={genre?.name} className='bg-blue-800/20 py-1 px-2.5 rounded-[15px
 </div>
 <div className="mt-5 sm:flex sm:gap-8">
   <h3 className="font-bold!">Cast:</h3>
-  <ul className="flex flex-col lg:flex-row sm:grid 
-  sm:grid-cols-2 justify-center 
+  <ul className="max-sm:flex max-sm:flex-col lg:flex lg:flex-row md:grid 
+  md:grid-cols-2 max-smjustify-center 
   max-sm:items-center">
     {cast.map((c,index)=>{
     
