@@ -144,7 +144,7 @@ if (error) {
          <div className="pt-13">
         <div
   className="w-full  
-  md:grid md:grid-cols-4 p-9 flex flex-col justify-center
+  lg:grid lg:grid-cols-4 p-9 flex flex-col justify-center
   items-center bg-center relative"
 >
   <div>
