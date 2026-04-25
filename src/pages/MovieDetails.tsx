@@ -213,7 +213,9 @@ return <li key={genre?.name} className='bg-blue-800/20 py-1 px-2.5 rounded-[15px
 </div>
 <div className="mt-5 sm:flex sm:gap-8">
   <h3 className="font-bold!">Cast:</h3>
-  <ul className="flex flex-col lg:flex-row max-md:grid max-md:grid-cols-2 max-sm:justify-center max-sm:items-center">
+  <ul className="flex flex-col lg:flex-row sm:grid 
+  sm:grid-cols-2 justify-center 
+  max-sm:items-center">
     {cast.map((c,index)=>{
     
       return (<div className="sm:m-3 max-sm:mb-9">
