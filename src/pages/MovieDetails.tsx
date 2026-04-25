@@ -144,24 +144,26 @@ if (error) {
          <div className="pt-13">
         <div
   className="w-full  
-  sm:grid sm:grid-cols-4 p-9 flex flex-col justify-center
+  md:grid md:grid-cols-4 p-9 flex flex-col justify-center
   items-center bg-center relative"
 >
   <div>
     <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={`${movie?.title} picture`} 
 className="rounded-lg shadow-[5px_5px_15px_5px_rgba(0,0,0,0.6)]" />
     
-    <div className="flex sm:gap-10 max-sm:flex-col "> 
+    <div className="flex flex-col "> 
    <button type="button" aria-label="play movie" className="p-10 transsition-all
-            duration-300 ease shadow-[2px_2px_15px_5px_rgba(0,0,0,0.4)]
-            hover:bg-gray-400 flex mt-5 sm:mt-8 bg-white text-black px-6 py-4 rounded-md font-semibold">
+            duration-300 ease shadow-[2px_2px_15px_5px_rgba(0,0,0,0.4)] 
+            justify-center items-center 
+            hover:bg-gray-400 flex mt-5 sm:mt-8 
+            bg-white text-black px-6 py-4 rounded-md font-semibold">
           <MdPlayArrow className="w-6 h-6" />
           Watch Trailer
         </button>
        <button type="button" aria-label="play movie" className={` transsition-all
     duration-300 ease justify-center items-center 
     hover:bg-gray-400 flex mt-5 sm:mt-8
-      text-white px-6 py-4 rounded-md
+      text-white px-6 py-4 rounded-md mb-5
      font-semibold ${watchList.some(m => m.id == movie?.id)? "cursor-not-allowed bg-black shadow-[2px_2px_15px_5px_rgba(255,255,255,0.2)]":"bg-blue-800 shadow-[2px_2px_15px_5px_rgba(0,0,0,0.4)]"}`}
       disabled={watchList.some(m => m.id ==movie?.id)}  
      onClick={(e)=>{addMovie(movie);
@@ -211,9 +213,9 @@ return <li key={genre?.name} className='bg-blue-800/20 py-1 px-2.5 rounded-[15px
 </div>
 <div className="mt-5 sm:flex sm:gap-8">
   <h3 className="font-bold!">Cast:</h3>
-  <ul className=" flex flex-col sm:flex-row max-sm:justify-center max-sm:items-center">
+  <ul className="flex flex-col lg:flex-row max-md:grid max-md:grid-cols-2 max-sm:justify-center max-sm:items-center">
     {cast.map((c,index)=>{
-      console.log(c.name)
+    
       return (<div className="sm:m-3 max-sm:mb-9">
       <img
       className="rounded-[7px] max-sm:w-40 mb-2  shadow-[0_0_1px_1px_rgba(255,255,255,0.6)]"
