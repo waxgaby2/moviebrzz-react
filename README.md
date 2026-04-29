@@ -1,79 +1,78 @@
-# 🍷 Virago Spirits — Modern Landing Page
+# 🎬 MovieBrzz — React Movie Discovery App
 
-A premium, responsive landing page for a craft distillery brand, built with modern web technologies and a strong focus on design, performance, and user experience.
+A modern movie discovery web application built with React, designed to help users explore trending films, search for titles, and discover new content effortlessly.
 
-🔗 **Live Site:** https://viragospirits.vercel.app
+🔗 **Live Site:** https://moviebrzz-react.vercel.app
 
 ---
 
 ## ✨ Overview
 
-Virago Spirits is a visually rich landing page that showcases a fictional craft distillery. The site highlights brand identity, featured spirits, storytelling, and user engagement through a clean, modern UI.
+MovieBrzz is a dynamic and responsive movie browsing application that allows users to explore movies across different categories such as trending, popular, and top-rated.
 
-The goal of this project was to create a **production-ready, high-end marketing website** using Next.js and Tailwind CSS.
+The project focuses on delivering a **smooth user experience**, fast performance, and clean UI while working with real-time movie data.
 
 ---
 
 ## 🚀 Features
 
-* ⚡ Fully responsive design (mobile-first)
-* 🎨 Modern UI with gradients, overlays, and typography
-* 🧭 Smooth mobile navigation drawer
-* 🥃 Product showcase with horizontal scroll
-* 🎯 Hero section with layered backgrounds
-* 📱 Optimized for performance and accessibility
-* 🖼️ Image optimization using Next.js `<Image />`
+* 🔍 Search for movies in real-time
+* 🎬 Browse trending, popular, and top-rated movies
+* 📄 View movie details (ratings, overview, etc.)
+* 📱 Fully responsive across all devices
+* ⚡ Fast and interactive UI
+* 🔄 Dynamic data fetching from external API
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Framework:** Next.js (App Router)
-* **Styling:** Tailwind CSS (v4)
-* **Language:** TypeScript
-* **Icons:** Heroicons
+* **Frontend:** React.js
+* **Styling:** CSS / Tailwind (depending on your setup)
+* **State Management:** React Hooks / Context API
+* **API:** Movie database API (e.g. TMDB)
 * **Deployment:** Vercel
 
 ---
 
 ## 📁 Project Structure
 
-```
-/app
-  /components   → Reusable UI components
-  /ui           → Fonts & shared styles
-  layout.tsx    → Root layout
-  page.tsx      → Homepage
-/public
-  /images       → Assets (bottles, founders, etc.)
+```bash
+/src
+  /components     → Reusable UI components
+  /pages          → App views / routes
+  /services       → API calls
+  /assets         → Images & static files
+  App.jsx         → Main app component
+  main.jsx        → Entry point
 ```
 
 ---
 
 ## 🧪 Local Development
 
-Clone the repo and run locally:
+Clone and run locally:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
 cd YOUR_REPO
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
-App will be available at:
+App runs on:
 
-```
-http://localhost:3000
+```bash
+http://localhost:5173
 ```
 
 ---
 
 ## 🚀 Deployment
 
-This project is deployed on **Vercel** for fast global delivery and seamless CI/CD.
+This project is deployed on **Vercel** for seamless hosting and performance optimization.
 
-To deploy your own version:
+To deploy:
 
 1. Push to GitHub
 2. Import project into Vercel
@@ -81,21 +80,22 @@ To deploy your own version:
 
 ---
 
-## 🎯 Design Highlights
+## 🎯 Key Highlights
 
-* Clean luxury aesthetic inspired by premium spirit brands
-* Strong typography pairing (serif + sans-serif)
-* Layered hero section with gradient overlays
-* Interactive hover states and micro-animations
+* Clean and intuitive movie browsing experience
+* Efficient API integration for dynamic content
+* Component-based architecture for scalability
+* Mobile-first responsive design
 
 ---
 
 ## 📌 Future Improvements
 
-* Add animations (Framer Motion)
-* Integrate CMS (e.g. Sanity or Contentful)
-* Add e-commerce functionality
-* Improve accessibility (ARIA, contrast tuning)
+* Add watchlist / favorites feature
+* Add trailer playback
+* Pagination or infinite scroll
+* Improve UI animations and transitions
+* Add authentication (user accounts)
 
 ---
 
